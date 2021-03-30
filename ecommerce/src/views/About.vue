@@ -13,12 +13,18 @@
       <p>Tintomara är en enskild firma (Sara Söderberg) som innehar F-skattsedel och är registrerad för moms.  </p>
 
     </div>
+    <button @click="sagasgasd"> gasgasg</button>
   </div>
 </template>
 
 <script>
 export default {
-  
+  methods: {
+    sagasgasd() {
+      let date = new Date
+      console.log(date)
+    }
+  }
 }
 </script>
 

@@ -16,7 +16,7 @@
             <p class="h5">Email: {{oneuserorder.email}}</p>
           </div>
           <div>
-            <h5>Datum: </h5>
+            <h5  @click="asf">Datum: </h5>
             <p>{{oneuserorder.createdAt}}</p>
           </div>
         </div>
@@ -75,6 +75,11 @@ export default {
   },
   methods: {
     ...mapActions(['findUserOrders']),
+    asf() {
+      console.log(this.oneuserorder.createdAt)
+      let date = new Date(this.oneuserorder.createdAt)
+      console.log(date.getFullYear())
+    },
 
 
     gsagsadg() {

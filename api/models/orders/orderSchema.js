@@ -11,7 +11,7 @@ const orderSchema = mongodb.Schema({
   cart: {type: Array},
   totalprice: {type: Number},
 
-  createdAt: { type: Date, default: Date.now() }
+  createdAt: { type: Date, default: new Date }
 
 })
 

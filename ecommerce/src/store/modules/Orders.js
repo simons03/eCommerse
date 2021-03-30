@@ -9,13 +9,50 @@ export default {
   },
   getters: {
     userorders: state => state.userorders,
-    oneuserorder: state => state.oneuserorder,
+    // oneuserorder: state => state.oneuserorder,
+    oneuserorder: state => {
+        if(state.oneuserorder) {
+          // let d = new Date(state.oneuserorder.createdAt)
+          // let year = d.getFullYear()
+          // let month = d.getMonth()
+          // let day = d.getDate()
+
+          // let date = `${year}-${month}-${day}`
+          // console.log(date)
+          let date = dateBuilder(new Date(state.oneuserorder.createdAt))
+          let order = {
+            ...state.oneuserorder,
+            createdAt: date
+          }
+          // console.log(order)
+          return order
+        } else {
+          return state.oneuserorder
+        }
+
+
+
+      
+    },
     allorders: state => state.allorders,
     oneAdminOrder: state => state.oneAdminOrder
   },
   mutations: {
     SET_USER_ORDERS: (state, result) => {
-      state.userorders = result.reverse()
+      // state.userorders = result.reverse()
+      let orders = result.map(order => {
+        // let d = new Date(order.createdAt)
+        // let year = d.getFullYear()
+        // let month = d.getMonth()
+        // let day = d.getDate()
+
+        // order.createdAt = `${year}-${month}-${day}`
+        order.createdAt = dateBuilder(new Date(order.createdAt))
+
+        return order
+      })
+
+      state.userorders = orders
     },
     SET_ONE_USER_ORDER: (state, data) => {
       state.oneuserorder = data
@@ -31,7 +68,7 @@ export default {
     }
   },
   actions: {
-    addOrder: async ({commit}, data) => {
+    addOrder: async (context, data) => {
       let newOrder = {
         userId: data.user._id,
         email: data.user.email,
@@ -43,17 +80,20 @@ export default {
         if(res.status === 201) {
           console.log('grattis din order är skickad')
         }
+        else {
+          console.log('nått gick fel')
+        }
       })
       // commit('ORDER_PLACED')
       // console.log('--------------')
-      console.log(commit)
+      // console.log(commit)
     },
 
-    findUserOrders: async ({commit}, id) => {
+    findUserOrders: async (context, id) => {
 
       const res = await axios.get('http://localhost:9999/api/orders')
       const result = await res.data.filter(order => order.userId == id)
-      commit('SET_USER_ORDERS', result)
+      context.commit('SET_USER_ORDERS', result)
       console.log(result)
     },
     findOneUserOrder: async ({commit}, orderNr) => {
@@ -73,4 +113,13 @@ export default {
       commit('SET_ONE_ADMIN_ORDER_TO_NULL')
     }
   },
+}
+
+const dateBuilder = (d) => {
+  let year = d.getFullYear()
+  let month = d.getMonth()
+  let day = d.getDate()
+
+  let date = `${year}-${month}-${day}`
+  return date
 }

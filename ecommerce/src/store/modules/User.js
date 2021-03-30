@@ -84,22 +84,22 @@ export default {
 
     register: async ({dispatch}, _user) => {
 
-      // let user = {
-      //   email: _user.email,
-      //   password: _user.password
-      // }
+      let user = {
+        email: _user.email,
+        password: _user.password
+      }
       
       await axios.post('http://localhost:9999/api/users/register', _user)
 
-      // dispatch('login', {user})
-      console.log(dispatch)
+      dispatch('login', {user})
+      // console.log(dispatch)
     },
 
     login: ({commit, dispatch}, paylode) => {
 
       // console.log(paylode.email)
       // console.log(commit)
-      axios.post('http://localhost:9999/api/users/login', paylode)
+      axios.post('http://localhost:9999/api/users/login', paylode.user)
       .then(res => {
         if(res.status === 200) {
 
