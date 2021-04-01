@@ -97,8 +97,10 @@ export default {
 
     login: ({commit, dispatch}, paylode) => {
 
+      // console.log(paylode)
       // console.log(paylode.email)
       // console.log(commit)
+      // console.log(paylode)
       axios.post('http://localhost:9999/api/users/login', paylode.user)
       .then(res => {
         if(res.status === 200) {

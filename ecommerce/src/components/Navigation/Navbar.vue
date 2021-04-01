@@ -123,8 +123,9 @@ export default {
           email: this.email,
           password: this.password
         }
-        
-        this.login(user)
+
+        let tomVariabel = ''
+        this.login( {user,tomVariabel} )
 
       } else {
         error.innerText = 'Du måste fylla i dina uppgifter'

@@ -1,5 +1,5 @@
 <template>
-  <div class="holder">
+  <div class="holder" v-if="loggedInUser.admin">
     <admin-menu />
     <div class="container mt-5">
       <h1 class="text-center">Alla produkter</h1>
@@ -25,7 +25,7 @@ export default {
 
   },
   computed: {
-    ...mapGetters(['products'])
+    ...mapGetters(['products', 'loggedInUser'])
   },
   created() {
     this.getProducts()

@@ -12,13 +12,7 @@ export default {
     // oneuserorder: state => state.oneuserorder,
     oneuserorder: state => {
         if(state.oneuserorder) {
-          // let d = new Date(state.oneuserorder.createdAt)
-          // let year = d.getFullYear()
-          // let month = d.getMonth()
-          // let day = d.getDate()
 
-          // let date = `${year}-${month}-${day}`
-          // console.log(date)
           let date = dateBuilder(new Date(state.oneuserorder.createdAt))
           let order = {
             ...state.oneuserorder,
@@ -31,11 +25,24 @@ export default {
         }
 
 
-
-      
     },
     allorders: state => state.allorders,
-    oneAdminOrder: state => state.oneAdminOrder
+    oneAdminOrder: state => {
+      if(state.oneAdminOrder) {
+
+        let date = dateBuilder(new Date(state.oneAdminOrder.createdAt))
+        let order = {
+          ...state.oneAdminOrder,
+          createdAt: date
+        }
+        // console.log(order)
+        return order
+      } else {
+        return state.oneAdminOrder
+      }
+
+
+  },
   },
   mutations: {
     SET_USER_ORDERS: (state, result) => {
@@ -58,7 +65,15 @@ export default {
       state.oneuserorder = data
     },
     SET_ALL_ORDERS: (state, data) => {
-      state.allorders = data.reverse()
+
+      let orders = data.map(order => {
+
+        order.createdAt = dateBuilder(new Date(order.createdAt))
+
+        return order
+
+      })
+      state.allorders = orders.reverse()
     },
     SET_ONE_ADMIN_ORDER: (state, data) => {
       state.oneAdminOrder = data
@@ -94,7 +109,7 @@ export default {
       const res = await axios.get('http://localhost:9999/api/orders')
       const result = await res.data.filter(order => order.userId == id)
       context.commit('SET_USER_ORDERS', result)
-      console.log(result)
+      // console.log(result)
     },
     findOneUserOrder: async ({commit}, orderNr) => {
       const res = await axios.get('http://localhost:9999/api/orders/' + orderNr)
@@ -117,7 +132,7 @@ export default {
 
 const dateBuilder = (d) => {
   let year = d.getFullYear()
-  let month = d.getMonth()
+  let month = d.getMonth() + 1
   let day = d.getDate()
 
   let date = `${year}-${month}-${day}`

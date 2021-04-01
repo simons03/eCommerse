@@ -1,5 +1,5 @@
 <template>
-  <div class="holder">
+  <div class="holder" v-if="loggedInUser.admin">
     <admin-menu />
     <div class="container">
       <h4 class="text-center mt-4">Sök efter ordrar</h4>
@@ -101,7 +101,7 @@ export default {
 
   },
   computed: {
-    ...mapGetters(['allorders', 'oneAdminOrder']),
+    ...mapGetters(['allorders', 'oneAdminOrder', 'loggedInUser']),
     filterOrders() {
 
       return this.allorders.filter(order => order.email.match(this.searchMail))

@@ -11,19 +11,14 @@
       <p>Jag sysslar även med made by order vilket innebär att jag syr upp efter beställning. Genom denna tjänst ser jag till att det inte görs kläder som ligger på hög. Om du beställer ett plagg av mig så syr jag det till dig helt enkelt! Detta innebär såklart att plaggen inte finns färdiga i ett lager och att leveranstiden blir lite längre. I normala fall omkring 1-4 veckor.</p>
       <p>Vilka plagg som finns att beställa genom made by order hittar ni under fliken “Made to You”.</p>
       <p>Tintomara är en enskild firma (Sara Söderberg) som innehar F-skattsedel och är registrerad för moms.  </p>
-
     </div>
-    <button @click="sagasgasd"> gasgasg</button>
   </div>
 </template>
 
 <script>
 export default {
   methods: {
-    sagasgasd() {
-      let date = new Date
-      console.log(date)
-    }
+
   }
 }
 </script>
