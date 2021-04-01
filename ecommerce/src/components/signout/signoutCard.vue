@@ -16,7 +16,7 @@
   <!-- <td>{{cart.price}}</td> -->
   <td>
     <p>{{item.quantity}} st</p>  
-    <p>{{item.product._id}}</p>
+    <!-- <p>{{item.product._id}}</p> -->
   </td>
   <td>
     <p>{{item.product.description}}</p>  
@@ -30,6 +30,7 @@
     </button>
   </td>
 </tr>
+
 
 </template>
 
